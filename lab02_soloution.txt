@@ -1,0 +1,23 @@
+.text
+
+prog:
+    mv s0, zero          
+    li t0, 0             
+
+loop:
+    beq t0, a1, done     
+    slli t1, t0, 2       
+    add t2, a0, t1       
+    lw t3, 0(t2)         
+    beq t3, a2, match    
+    addi t0, t0, 1       
+    j loop               
+
+match:
+    mv s0, t2            
+    addi t0, t0, 1       
+    j loop               
+
+done:
+    addi a7, zero, 10   
+    ecall
